@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="home"),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('api/todos', views.api_list_todos, name="api-todos"),
 ]
