@@ -11,3 +11,5 @@ class User(AbstractUser):
 
 class Todo(models.Model):
     name = models.CharField()
+    user = models.ForeignKey(
+        to=User, on_delete=models.CASCADE, related_name='todos')

@@ -18,9 +18,32 @@ from django.contrib import admin
 from django.urls import path, include
 from todos import views
 
+user_list = views.UserViewSet.as_view({
+    'get': 'list',
+})
+user_detail = views.UserViewSet.as_view({
+    'get': 'retrieve',
+})
+todo_list = views.TodoViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
+})
+todo_detail = views.TodoViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy',
+})
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="home"),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('api/todos', views.api_list_todos, name="api-todos"),
+    # path('api/todos', views.api_list_todos, name="api-todos"),
+    path('api/users', user_list, name='user-list'),
+    path('api/users/<int:pk>', user_detail, name='user=detail'),
+    path('api/todos', todo_list, name='todo-list'),
+    # updates line 43 to use drf
+    path('api/todos/<int:pk>', todo_detail, name='todo-detail'),
 ]
