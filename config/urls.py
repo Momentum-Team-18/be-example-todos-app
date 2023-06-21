@@ -39,8 +39,8 @@ todo_detail = views.TodoViewSet.as_view({
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="home"),
-    path('accounts/', include('registration.backends.simple.urls')),
-    # path('api/todos', views.api_list_todos, name="api-todos"),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
     path('api/users', user_list, name='user-list'),
     path('api/users/<int:pk>', user_detail, name='user=detail'),
     path('api/todos', todo_list, name='todo-list'),
